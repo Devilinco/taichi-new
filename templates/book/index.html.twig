@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des livres{% endblock %}
+
+{% block body %}
+    <section class="bg-primary text-white" id="Documents" style="padding-top: 110px;">
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h2 class="section-heading text-center">Livres enregistrés ({{ pagination.getTotalItemCount }})</h2>
+                    <a class="btn btn-success float-right" href="{{ path('book_new') }}">Ajouter</a>
+                </div>
+                <div class="col-md-12">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-12">
+                    {{ form_start(form) }}
+                    <div class="row d-flex flex-row justify-content-evenly align-items-center">
+                        <div class="col-sm-10">
+                            {{ form_row(form.bookTitle) }}
+                        </div>
+                        <div class="col-sm-2 d-flex justify-content-start">
+                            <button type="submit" class="btn btn-secondary text-capitalize">Rechercher </button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="text-left text-dark">{{ knp_pagination_sortable(pagination, 'Image', 'b.filename') }}</th>
+                                <th scope="col" class="text-left flex-grow-2">{{ knp_pagination_sortable(pagination, 'Titre', 'b.title') }}</th>
+                                <th scope="col" class="text-left">{{ knp_pagination_sortable(pagination, 'Auteur', 'b.author') }}</th>
+                                <th scope="col" class="text-left">{{ knp_pagination_sortable(pagination, 'Editeur', 'b.editor') }}</th>
+                                <th scope="col" class="text-left">{{ knp_pagination_sortable(pagination, 'Ajouté le', 'b.createdAt') }}</th>
+                                <th scope="col" class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-white">
+                        {% for book in pagination %}
+                            <tr>
+                                <td>{% if book.filename %}
+                                        <img src="{{ vich_uploader_asset(book, 'imageFile') | imagine_filter('thumb') }}" width="100%" alt="{{ book.fileName }}">
+                                    {% else %}
+                                        empty
+                                    {% endif %}
+                                </td>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.author }}</td>
+                                <td>{{ book.editor }}</td>
+                                <td>{{ book.createdAt ? book.createdAt|ago : '' }}</td>
+                                <td>
+                                    {#                                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>#}
+                                    <a class="btn btn-info" href="{{ path('book_edit', {'id': book.id}) }}">éditer</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Aucun livre enregistré</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {# display navigation #}
+                    <div class="navigation" id="paginationActu">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

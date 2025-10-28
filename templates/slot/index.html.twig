@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}index des cours{% endblock %}
+
+{% block body %}
+    <section class="bg-primary text-white" id="Locations" style="padding-top: 110px;">
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h2 class="section-heading text-center">Cours enregistrés</h2>
+                    <a class="btn btn-success float-right" href="{{ path('slot_new') }}">Ajouter</a>
+                </div>
+                <div class="col-md-12 mt-4">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Jour</th>
+                            <th>Démarre</th>
+                            <th>Finit</th>
+                            <th>Niveau</th>
+                            <th>Lieu</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-white">
+                            {% for slot in slots %}
+                                <tr>
+                                    <td>{{ slot.getDayId }}</td>
+                                    <td>{{ slot.startAt ? slot.startAt|date('H:i') : '' }}</td>
+                                    <td>{{ slot.endAt ? slot.endAt|date('H:i') : '' }}</td>
+                                    <td>{{ slot.level }}</td>
+                                    <td>{{ slot.location.name }}</td>
+                                    <td class="text-right">
+                                        <a class="btn btn-info" href="{{ path('slot_edit', {'id': slot.id}) }}">éditer</a>
+                                    </td>
+{#                                    <td>#}
+{#                                        <a href="{{ path('slot_show', {'id': slot.id}) }}">show</a>#}
+{#                                        <a href="{{ path('slot_edit', {'id': slot.id}) }}">edit</a>#}
+{#                                    </td>#}
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">Aucun cours enregistré</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

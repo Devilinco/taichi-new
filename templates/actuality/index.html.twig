@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des actualités{% endblock %}
+{% block javascripts %}
+    <link rel="stylesheet" href="{{ asset('css/actuality.css') }}">
+{% endblock %}
+{% block body %}
+    <section class="bg-primary text-white" id="Documents" style="padding-top: 110px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="section-heading text-center">Actualités enregistrées ({{ pagination.getTotalItemCount }})</h2>
+                    <a class="btn btn-success float-right" href="{{ path('actuality_new') }}">Ajouter</a>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="text-left">Titre</th>
+                        <th scope="col" class="text-left flex-grow-2">Description</th>
+                        <th scope="col" class="text-left">Ajoutée le</th>
+                        <th scope="col" class="text-right"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-white">
+                    {% for actuality in pagination %}
+                        <tr>
+                            <td scope="row">{{ actuality.title }}</td>
+                            <td class="flex-grow-2">{{ actuality.getShortDescription() }}</td>
+                            <td>{{ actuality.createdAt|ago }}</td>
+                            <td class="text-right">
+                                <a class="btn btn-info" href="{{ path('actuality_edit', {'id': actuality.id}) }}">éditer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">Aucune actualité enregistré</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {# display navigation #}
+                <div class="navigation" id="paginationActu">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

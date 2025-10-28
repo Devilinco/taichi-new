@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Yvane RISPAIL, enseigne le taichi TUNG, style YANG à tous publics dans les Yvelines sur les communes de Fontenay-le-Fleury 78330, Plaisir 78370, Les Clayes-sous-bois 78340, Viroflay 78220">
+    <meta name="author" content="Yvane RISPAIL">
+    <META NAME="keywords" CONTENT="taïchi, yvane, Rispail, taichi, tai, chi, FONTENAY, PLAISIR, CLAYES, VIROFLAY, fontenay, fleury, plaisirs, clayes, viroflay, YANG, Yvelines">
+    <title>{% block title %}Welcome!{% endblock %} | TAICHI-CHUAN - Yvane RISPAIL</title>
+
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('cookieconsent-2.5.1/src/cookieconsent.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/creative.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/taichi.css') }}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101660364-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-101660364-1');
+    </script>
+
+    {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top flex-grow-1" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="{{ path('home') }}"><img src="{{ asset('img/Logo_Toum-asso-Web.png') }}" height="80px" width="auto" alt="logo"></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger {% if current_menu is defined and current_menu == 'home' %}active{% endif %}" href="{{ path('home') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('home') }}#Infos">Infos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('home') }}#Cours">Cours</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('home') }}#Ateliers">Ateliers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('home') }}#Galeries">Galeries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger {% if current_menu is defined and current_menu == 'actuality' %}active{% endif %}" href="{{ path('actuality') }}">Actualités</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger {% if current_menu is defined and current_menu == 'document' %}active{% endif %}" href="{{ path('document') }}">Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('home') }}#Contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if app.user %}
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administration
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item nav-link" href="{{ path('slot_index') }}">Créneaux des cours</a>
+                                    <a class="dropdown-item nav-link" href="{{ path('location_index') }}">Lieux des cours</a>
+                                    <a class="dropdown-item nav-link" href="{{ path('price_index') }}">Tarifs</a>
+                                    <a class="dropdown-item nav-link" href="{{ path('actuality_index') }}">Actualités</a>
+                                    <a class="dropdown-item nav-link" href="{{ path('book_index') }}">Livres</a>
+                                    <a class="dropdown-item nav-link js-scroll-trigger bg-danger" href="{{ path('app_logout') }}">Se déconnecter</a>
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <a class="nav-link js-scroll-trigger" href="{{ path('app_login') }}">Se connecter</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        {% block body %}{% endblock %}
+
+        <footer class="d-flex justify-content-center align-items-center flex-column flex-grow-1">
+            <p>site le l'association TOUM <a href="http://toum.asso.fr" target="_blank">http://toum.asso.fr</a></p>
+            <p>site du maître TUNG <a href="http://www.tungkaiying.com/welcome.shtml" target="_blank">http://www.tungkaiying.com/welcome.shtml</a></p>
+            <p>© <script>document.write(new Date().getFullYear());</script> taïchi-chuan, by <b>NORNEX.</b></p>
+            <a href="{{ path('mention') }}" class="btn btn-outline-info">Mentions légales</a>
+            <button type="button" class="btn btn-info" data-cc="c-settings">préférences des cookies</button>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+        <script src="{{ asset('bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.fr.min.js') }}"></script>
+
+        <script src="{{ asset('js/jquery-easing/jquery.easing.js') }}"></script>
+        <script src="{{ asset('js/magnific-popup/jquery.magnific-popup.js') }}"></script>
+        <script src="{{ asset('js/scrollreveal/scrollreveal.js') }}"></script>
+        <script src="{{ asset('js/creative.js') }}"></script>
+        <script src="{{ asset('cookieconsent-2.5.1/src/cookieconsent.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+        <script>
+            $(document).ready(function() {
+                // you may need to change this code if you are not using Bootstrap Datepicker
+                $('.js-datepicker').datepicker({
+                    format: 'dd MM yyyy',
+                    multidate: true,
+                    multidateSeparator: ',',
+                    startDate: 'd',
+                    weekStart: 1,
+                    clearBtn: true,
+                    todayBtn: true,
+                    todayHighlight: true,
+                    language: 'fr',
+                    autoclose: false,
+                });
+            });
+        </script>
+        <script>
+            var cookieconsent = initCookieConsent();
+
+            cookieconsent.run({
+                current_lang : document.documentElement.getAttribute('lang'),
+                theme_css : 'css/customCookie.css',
+                force_consent : true,
+
+                gui_options: {
+                    consent_modal : {
+                        layout : 'cloud',               // box/cloud/bar
+                        position : 'bottom center',     // bottom/top + left/right/center
+                        transition: 'slide'             // zoom/slide
+                    },
+                    settings_modal : {
+                        layout : 'box',                 // box/bar
+                        // position : 'left',           // left/right
+                        transition: 'slide'             // zoom/slide
+                    }
+                },
+
+                onAccept : function(){
+                    // do something ...
+                },
+
+                languages : {
+                    fr : {
+                        consent_modal : {
+                            title :  "Veux-tu un cookie?",
+                            description :  "J'aime les cookies, ça donne le sourire et en plus je travaillle mieux avec.",
+                            primary_btn: {
+                                text: "J'accepte",
+                                role: 'accept_all'  //'accept_selected' or 'accept_all'
+                            },
+                            secondary_btn: {
+                                text : 'Seulement le néccessaire',
+                                role : 'accept_necessary'   //'settings' or 'accept_necessary'
+                            }
+                        },
+                        settings_modal : {
+                            title : 'Configuration des cookies',
+                            save_settings_btn : "Enregistrer",
+                            accept_all_btn : "Tout accepter",
+                            reject_all_btn : "Seulement le nécessaire", // optional, [v.2.5.0 +]
+                            close_btn_label: "Close",
+                            blocks : [
+                                {
+                                    title : "Catégories de cookies standard",
+                                    description: "Lorsque vous scannez un site Web, chaque cookie trouvé est comparé à la base de données de cookies Cookiepedia. " +
+                                        "Les cookies sont automatiquement affectés à l'une des catégories ci-dessous en fonction des informations contenues dans la base de données. " +
+                                        "Les cookies qui n'ont pas de correspondance dans Cookiepedia ne seront pas automatiquement catégorisés et doivent être ajoutés manuellement au groupe approprié."
+                                },{
+                                    title : "Les cookies strictement nécessaires",
+                                    description: "Ces cookies sont nécessaires au fonctionnement du site Web et ne peuvent pas être désactivés dans nos systèmes. " +
+                                        "Ils ne sont généralement définis qu'en réponse à des actions de votre part qui équivalent à une demande de services, " +
+                                        "telles que la définition de vos préférences de confidentialité, la connexion ou le remplissage de formulaires. " +
+                                        "Vous pouvez paramétrer votre navigateur pour bloquer ou vous alerter sur ces cookies, mais certaines parties du site ne fonctionneront alors pas. " +
+                                        "Ces cookies ne stockent aucune information personnellement identifiable.",
+                                    toggle : {
+                                        value : 'necessary',
+                                        enabled : false,
+                                        readonly: true
+                                    }
+                                },{
+                                    title : "Cookies de fonctionnement",
+                                    description: "Ces cookies permettent au site Web de fournir des fonctionnalités et une personnalisation améliorées. " +
+                                        "Ils peuvent être définis par nous ou par des fournisseurs tiers dont nous avons ajouté les services à nos pages. " +
+                                        "Si vous n'autorisez pas ces cookies, certains ou tous ces services peuvent ne pas fonctionner correctement.",
+                                    toggle : {
+                                        value : 'functional',
+                                        enabled : false,
+                                        readonly: false
+                                    }
+                                },
+                            ]
+                        }
+                    }
+
+                }
+            });
+        </script>
+    </body>
+</html>

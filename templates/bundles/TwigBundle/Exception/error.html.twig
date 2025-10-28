@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}An Error Occurred: {{ status_text }}{% endblock %}
+{% block body %}
+
+    <div class="container-fluid flex flex-column align-items-center text-center bg-primary text-white w-100 h-100" style="padding-top: 110px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="font-size: 4em">Oops an error occured !</h1>
+                <h2>The server returned a "{{ status_code }} {{ status_text }}"</h2>
+            </div>
+        </div>
+        <div class="row flex justify-content-center">
+            <div class="col-md-8">
+                <div>
+                    Something is not working. Please let us know
+                    what you were doing when this error occurred. We will fix it as soon
+                    as possible. Sorry for any inconvenience caused.
+                </div>
+
+                <p>
+                    Checkout for any URL misspelling or <a class="text-accent" href="{{ path('home') }}">return to the homepage</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

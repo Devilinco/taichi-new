@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des tarifs{% endblock %}
+
+{% block body %}
+    <section class="bg-primary text-white" id="Locations" style="padding-top: 110px;">
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h2 class="section-heading text-center">Tarifs enregistrés</h2>
+{#                    <a class="btn btn-success float-right" href="{{ path('location_new') }}">Ajouter</a>#}
+                    <p class="lead text-center mt-4">Le bouton <a class="btn btn-success" href="#" >Ajouter</a>
+                        n'est pas cliquable, car seuls les titres et les montants sont éditables</p>
+                </div>
+                <div class="col-md-12 mt-4">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Titre</th>
+                            <th>Tarif</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-white">
+                        {% for price in prices %}
+                            <tr>
+                                <td>{{ price.title }}</td>
+                                <td class="text-center">{{ price.price }}€</td>
+                                <td class="text-right">
+                                    <a class="btn btn-info" href="{{ path('price_edit', {'id': price.id}) }}">éditer</a>
+                                </td>
+{#                                <td>#}
+{#                                    <a href="{{ path('price_show', {'id': price.id}) }}">show</a>#}
+{#                                    <a href="{{ path('price_edit', {'id': price.id}) }}">edit</a>#}
+{#                                </td>#}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Aucun tarif enregistré</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

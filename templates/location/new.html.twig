@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Location{% endblock %}
+
+{% block body %}
+    <section class="bg-primary text-white h-75" id="Locations" style="padding-top:110px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1>Ajouter un nouveau lieu d'entrainement</h1>
+                    <a class="btn btn-link float-left" href="{{ path('location_index') }}">Revenir à l'index</a>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    {{ include('location/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

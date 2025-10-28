@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+{#<div class="row mt-4">#}
+{#    <div class="col-md-12 d-flex flex-column justify-content-start align-items-center">#}
+{#        {% if readonly is same as true %}#}
+{#            le titre n'est pas modifiable car il ne se verrait plus sur le site ensuite.#}
+{#        {% endif %}#}
+{#        {{ form_row(form.title, {'attr': {'readonly': readonly }}) }}#}
+{#        {{ form_row(form.price) }}#}
+{#    </div>#}
+{#</div>#}
+    {{ form_widget(form) }}
+    <button class="btn btn-success float-right">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('book_delete', {'id': book.id}) }}" onsubmit="return confirm('Confirmer la suppression de ce document ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+    <button class="btn btn-danger float-left">Supprimer</button>
+</form>
